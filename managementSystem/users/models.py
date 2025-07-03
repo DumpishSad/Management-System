@@ -18,3 +18,9 @@ class User(AbstractUser):
 
     def __str__(self):
         return f'{self.email} ({self.role})'
+
+    def is_manager(self):
+        return self.role == 'manager'
+
+    def is_admin(self):
+        return self.role == 'admin'

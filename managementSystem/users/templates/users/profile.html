@@ -1,0 +1,12 @@
+<h2>Добро пожаловать, {{ user.username }}!</h2>
+<p>Это ваш личный кабинет.</p>
+
+<hr>
+
+<form action="{% url 'edit_profile' %}" method="get" style="display:inline;">
+    <button type="submit">Редактировать профиль</button>
+</form>
+
+<form action="{% url 'delete_account' %}" method="get" style="display:inline;">
+    <button type="submit" style="background-color: red; color: white;">Удалить аккаунт</button>
+</form>

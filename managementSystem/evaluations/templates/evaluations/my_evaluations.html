@@ -1,0 +1,15 @@
+<h2>Мои оценки</h2>
+
+{% if month_avg %}
+<p>📊 Средняя оценка {{ month_avg|floatformat:1 }}</p>
+{% else %}
+<p>Нет оценок за текущий месяц.</p>
+{% endif %}
+
+<ul>
+    {% for eval in evaluations %}
+        <li>{{ eval.date }} — {{ eval.task.title }}: {{ eval.score }}</li>
+    {% empty %}
+        <li>Оценок пока нет</li>
+    {% endfor %}
+</ul>

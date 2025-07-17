@@ -1,0 +1,6 @@
+<h2>Назначить встречу</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Создать встречу</button>
+</form>

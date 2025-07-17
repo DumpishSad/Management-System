@@ -1,0 +1,9 @@
+<h2>Оценка задачи: {{ task.title }}</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Поставить оценку</button>
+</form>
+
+<a href="{% url 'task_detail' task.id %}">← Назад к задаче</a>

@@ -1,0 +1,28 @@
+<h2>{{ task.title }}</h2>
+<p>{{ task.description }}</p>
+<p>Статус: {{ task.get_status_display }}</p>
+<p>Исполнитель: {{ task.assignee }}</p>
+<p>Дедлайн: {{ task.deadline }}</p>
+
+<h3>Комментарии</h3>
+<ul>
+  {% for comment in comments %}
+    <li><strong>{{ comment.author.username }}:</strong> {{ comment.text }}</li>
+  {% endfor %}
+</ul>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Добавить комментарий</button>
+</form>
+
+{% if can_evaluate %}
+  <a href="{% url 'evaluate_task' task.pk %}">Оценить задачу</a>
+{% endif %}
+
+<a href="{% url 'task_update' task.pk %}">Изменить</a>
+<form method="post" action="{% url 'task_delete' task.pk %}">
+  {% csrf_token %}
+  <button type="submit">Удалить</button>
+</form>

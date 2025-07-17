@@ -1,0 +1,21 @@
+<h2>Сегодня: {{ date }}</h2>
+
+<h3>Задачи</h3>
+<ul>
+  {% for task in tasks %}
+    <li>{{ task.title }} — {{ task.status }}</li>
+  {% empty %}
+    <li>Нет задач</li>
+  {% endfor %}
+</ul>
+
+<h3>Встречи</h3>
+<ul>
+  {% for meeting in meetings %}
+    <li>{{ meeting.title }} — {{ meeting.time }}</li>
+  {% empty %}
+    <li>Нет встреч</li>
+  {% endfor %}
+</ul>
+
+<a href="{% url 'calendar_monthly' %}">▶ Месячный вид</a>

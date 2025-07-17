@@ -1,0 +1,18 @@
+<h2>Мои встречи</h2>
+
+<ul>
+{% for meeting in meetings %}
+    <li>
+        <strong>{{ meeting.title }}</strong> —
+        {{ meeting.date }} {{ meeting.time }}<br>
+        Участники:
+        {{ meeting.participants.all|join:", " }}
+        <form method="post" action="{% url 'delete_meeting' meeting.pk %}">
+            {% csrf_token %}
+            <button type="submit">Отменить</button>
+        </form>
+    </li>
+{% empty %}
+    <li>Встреч нет</li>
+{% endfor %}
+</ul>

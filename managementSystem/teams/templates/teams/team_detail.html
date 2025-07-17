@@ -1,0 +1,6 @@
+<h2>Состав вашей команды</h2>
+<ul>
+    {% for member in members %}
+        <li>{{ member.username }} — {{ member.get_role_display }}</li>
+    {% endfor %}
+</ul>

@@ -43,7 +43,7 @@ Business Management System — веб-приложение для управле
 - Отображение задач по дате дедлайна
 - Автоматическое включение встреч и задач в календарь
 
-7. Админ-панель
+### 7. Админ-панель
 - Django Admin для управления:
 - Пользователями
 - Командами
@@ -54,7 +54,7 @@ Business Management System — веб-приложение для управле
 ---
 
 ## Установка и запуск проекта
-
+### 1. Клонировать репозиторий:
 ```bash
-git clone https://github.com/yourusername/businessManagementSystem.git
+[git clone https://github.com/yourusername/businessManagementSystem.git](https://github.com/DumpishSad/Management-System.git)
 ```

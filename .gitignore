@@ -1,7 +1,57 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Virtual environment
+venv/
+ENV/
+env/
+.venv/
+
+# Django database
+db.sqlite3
+*.sqlite3
+
+# Django migrations except __init__.py
 **/migrations/*.py
 !**/migrations/__init__.py
 
-db.sqlite3
+# Environment files
 .env
-venv/
+*.env
+
+# IDEs and editors
 .idea/
+.vscode/
+*.swp
+
+# macOS & Linux
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Static/media
+staticfiles/
+media/
+
+# Coverage & testing
+htmlcov/
+.coverage
+.tox/
+.nox/
+.pytest_cache/
+coverage.xml
+*.cover
+
+# Build
+dist/
+build/
+*.egg-info/
+
+# Local config
+*.local

@@ -4,6 +4,16 @@ Business Management System — веб-приложение для управле
 
 ---
 
+## Стек технологий
+
+- Python 3.11
+- Django 5.2
+- Django REST Framework
+- SQLite
+- HTML / Bootstrap
+  
+---
+
 ## Основные возможности
 
 ### 1. Пользователи

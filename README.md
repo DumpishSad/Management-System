@@ -58,3 +58,29 @@ Business Management System — веб-приложение для управле
 ```bash
 [git clone https://github.com/yourusername/businessManagementSystem.git](https://github.com/DumpishSad/Management-System.git)
 ```
+### 2. Перейти в директорию проекта:
+```bash
+cd businessManagementSystem
+```
+### 3. Создать и активировать виртуальное окружение:
+```bash
+python -m venv venv
+source venv/bin/activate
+```
+### 4. Установить зависимости:
+```bash
+pip install -r requirements.txt
+```
+### 5. Создать файл .env:
+```bash
+SECRET_KEY=ваш_секретный_ключ
+```
+### 6. Выполнить миграции:
+```bash
+python manage.py migrate
+```
+### 7. Запустить сервер:
+```bash
+python manage.py runserver
+```
+

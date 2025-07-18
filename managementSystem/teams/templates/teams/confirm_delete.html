@@ -1,0 +1,10 @@
+<h2>Удаление команды</h2>
+
+<p>Вы действительно хотите удалить команду <strong>{{ team.name }}</strong>?<br>
+Все участники останутся без команды.</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Удалить</button>
+    <a href="{% url 'team_detail' %}">Отмена</a>
+</form>

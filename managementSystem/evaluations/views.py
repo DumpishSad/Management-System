@@ -20,6 +20,10 @@ def evaluate_task(request, task_id):
         messages.error(request, "У вас нет прав на оценку.")
         return redirect('task_detail', pk=task_id)
 
+    if task.status != 'done':
+        messages.warning(request, "Оценивать можно только выполненные задачи.")
+        return redirect('task_detail', pk=task_id)
+
     existing = Evaluation.objects.filter(task=task, reviewer=request.user).first()
     if existing:
         messages.info(request, "Задача уже оценена.")

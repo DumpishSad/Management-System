@@ -53,9 +53,13 @@ def manage_team(request):
         if action == 'add':
             user_id = request.POST.get('user_id')
             user = User.objects.get(id=user_id)
-            user.team = team
-            user.save()
-            messages.success(request, f"{user.username} добавлен в команду.")
+
+            if user.team:
+                messages.warning(request, f"{user.username} уже состоит в команде.")
+            else:
+                user.team = team
+                user.save()
+                messages.success(request, f"{user.username} добавлен в команду.")
 
         elif action == 'set_role':
             user_id = request.POST.get('user_id')
@@ -70,3 +74,24 @@ def manage_team(request):
         'members': current_members,
         'available_users': available_users
     })
+
+
+@login_required
+def delete_team(request):
+    if not request.user.is_admin():
+        messages.error(request, "Только админ может удалить команду.")
+        return redirect('profile')
+
+    team = request.user.team
+    if request.method == 'POST':
+        members = list(team.user_set.all())
+        team.delete()
+
+        for member in members:
+            member.team = None
+            member.save()
+
+        messages.success(request, "Команда удалена.")
+        return redirect('profile')
+
+    return render(request, 'teams/confirm_delete.html', {'team': team})

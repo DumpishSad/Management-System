@@ -11,6 +11,12 @@ class MeetingForm(forms.ModelForm):
         label="Участники"
     )
 
+    datetime = forms.DateTimeField(
+        widget=forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+        input_formats=['%Y-%m-%dT%H:%M'],
+        label="Дата и время"
+    )
+
     class Meta:
         model = Meeting
-        fields = ['title', 'date', 'time', 'participants']
+        fields = ['title', 'datetime', 'participants']

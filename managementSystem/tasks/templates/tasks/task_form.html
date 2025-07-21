@@ -1,6 +1,16 @@
-<h2>{% if form.instance.pk %}Редактировать{% else %}Создать{% endif %} задачу</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Сохранить</button>
-</form>
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <h2>{% if form.instance.pk %}Редактировать{% else %}Создать{% endif %} задачу</h2>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Сохранить</button>
+  </form>
+
+  <div class="mt-3">
+    <a href="{% url 'task_list' %}" class="btn btn-link">← Назад к списку задач</a>
+  </div>
+</div>
+{% endblock %}

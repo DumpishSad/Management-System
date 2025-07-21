@@ -1,6 +1,5 @@
 from django.db import models
-from django.forms import CharField
-from .models import User
+from users.models import User
 
 
 class Task(models.Model):

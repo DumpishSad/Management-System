@@ -1,21 +1,36 @@
-<h2>Сегодня: {{ date }}</h2>
+{% extends "base.html" %}
 
-<h3>Задачи</h3>
-<ul>
-  {% for task in tasks %}
-    <li>{{ task.title }} — {{ task.status }}</li>
-  {% empty %}
-    <li>Нет задач</li>
-  {% endfor %}
-</ul>
+{% block content %}
+<div class="container">
+  <h2 class="mb-4">Сегодня — {{ date }}</h2>
 
-<h3>Встречи</h3>
-<ul>
-  {% for meeting in meetings %}
-    <li>{{ meeting.title }} — {{ meeting.time }}</li>
-  {% empty %}
-    <li>Нет встреч</li>
-  {% endfor %}
-</ul>
+  <h4>Задачи</h4>
+  {% if tasks %}
+    <ul class="list-group mb-4">
+      {% for task in tasks %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          {{ task.title }}
+          <span class="badge bg-secondary">{{ task.get_status_display }}</span>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Нет задач на сегодня.</p>
+  {% endif %}
 
-<a href="{% url 'calendar_monthly' %}">▶ Месячный вид</a>
+  <h4>Встречи</h4>
+  {% if meetings %}
+    <ul class="list-group mb-4">
+      {% for meeting in meetings %}
+        <li class="list-group-item">
+          {{ meeting.title }} — {{ meeting.time|time:"H:i" }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Нет встреч на сегодня.</p>
+  {% endif %}
+
+  <a class="btn btn-outline-primary" href="{% url 'calendar_monthly' %}">Перейти к месячному виду</a>
+</div>
+{% endblock %}

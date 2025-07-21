@@ -1,7 +1,13 @@
-<h2>Состав вашей команды</h2>
-<ul>
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <h2>Состав вашей команды</h2>
+  <ul class="list-group mb-3">
     {% for member in members %}
-        <li>{{ member.username }} — {{ member.get_role_display }}</li>
+      <li class="list-group-item">{{ member.username }} — {{ member.get_role_display }}</li>
     {% endfor %}
-    <a href="{% url 'delete_team' %}">Удалить команду</a>
-</ul>
+  </ul>
+
+  <a href="{% url 'delete_team' %}" class="btn btn-danger">Удалить команду</a>
+</div>
+{% endblock %}

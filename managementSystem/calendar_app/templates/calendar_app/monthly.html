@@ -1,24 +1,40 @@
-<h2>Календарь: {{ start|date:"F Y" }}</h2>
+{% extends "base.html" %}
 
-<table border="1" cellpadding="8">
-    <tr><th>Дата</th><th>Задачи</th><th>Встречи</th></tr>
-    {% for day, info in calendar_data.items %}
-    <tr>
-        <td>{{ day }}</td>
-        <td>
+{% block content %}
+<div class="container">
+  <h2 class="mb-4">Календарь: {{ start|date:"F Y" }}</h2>
+
+  <table class="table table-bordered">
+    <thead class="table-light">
+      <tr>
+        <th>Дата</th>
+        <th>Задачи</th>
+        <th>Встречи</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for day, info in calendar_data.items %}
+        <tr>
+          <td>{{ day|date:"d.m.Y" }}</td>
+          <td>
             {% for task in info.tasks %}
-                📝 {{ task.title }}<br>
-            {% empty %}—
+              • {{ task.title }}<br>
+            {% empty %}
+              <span class="text-muted">—</span>
             {% endfor %}
-        </td>
-        <td>
+          </td>
+          <td>
             {% for meeting in info.meetings %}
-                {{ meeting.title }} {{ meeting.time }}<br>
-            {% empty %}—
+              • {{ meeting.title }} {{ meeting.time|time:"H:i" }}<br>
+            {% empty %}
+              <span class="text-muted">—</span>
             {% endfor %}
-        </td>
-    </tr>
-    {% endfor %}
-</table>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 
-<a href="{% url 'calendar_daily' %}">◀ Дневной вид</a>
+  <a class="btn btn-outline-secondary" href="{% url 'calendar_daily' %}">Вернуться к дневному виду</a>
+</div>
+{% endblock %}

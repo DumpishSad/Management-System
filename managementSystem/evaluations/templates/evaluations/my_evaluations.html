@@ -1,15 +1,22 @@
-<h2>Мои оценки</h2>
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <h2>Мои оценки</h2>
 
-{% if month_avg %}
-<p>📊 Средняя оценка {{ month_avg|floatformat:1 }}</p>
-{% else %}
-<p>Нет оценок за текущий месяц.</p>
-{% endif %}
+  {% if month_avg %}
+    <p><strong>📊 Средняя оценка:</strong> {{ month_avg|floatformat:1 }}</p>
+  {% else %}
+    <p>Нет оценок за текущий месяц.</p>
+  {% endif %}
 
-<ul>
+  <ul class="list-group mt-3">
     {% for eval in evaluations %}
-        <li>{{ eval.date }} — {{ eval.task.title }}: {{ eval.score }}</li>
+      <li class="list-group-item">
+        <strong>{{ eval.date }}</strong> — {{ eval.task.title }}: <span class="badge bg-info">{{ eval.score }}</span>
+      </li>
     {% empty %}
-        <li>Оценок пока нет</li>
+      <li class="list-group-item text-muted">Оценок пока нет</li>
     {% endfor %}
-</ul>
+  </ul>
+</div>
+{% endblock %}

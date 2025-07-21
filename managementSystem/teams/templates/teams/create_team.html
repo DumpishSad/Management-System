@@ -1,6 +1,11 @@
-<h2>Создать команду</h2>
-<form method="post">
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <h2>Создать команду</h2>
+  <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Создать</button>
-</form>
+    <button type="submit" class="btn btn-success">Создать</button>
+  </form>
+</div>
+{% endblock %}

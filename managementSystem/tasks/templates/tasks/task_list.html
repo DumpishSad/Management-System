@@ -1,10 +1,23 @@
-<h2>Задачи</h2>
-<a href="{% url 'task_create' %}">Создать задачу</a>
-<ul>
-  {% for task in tasks %}
-    <li>
-      <a href="{% url 'task_detail' task.pk %}">{{ task.title }}</a>
-      — {{ task.status }} — {{ task.assignee }}
-    </li>
-  {% endfor %}
-</ul>
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <h2>Задачи</h2>
+
+  <div class="mb-3">
+    <a href="{% url 'task_create' %}" class="btn btn-primary">+ Новая задача</a>
+  </div>
+
+  <ul class="list-group">
+    {% for task in tasks %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <a href="{% url 'task_detail' task.pk %}">{{ task.title }}</a>
+        <span class="text-muted">
+          {{ task.get_status_display }} — {{ task.assignee }}
+        </span>
+      </li>
+    {% empty %}
+      <li class="list-group-item text-muted">Задач пока нет.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

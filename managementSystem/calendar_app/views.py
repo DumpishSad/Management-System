@@ -14,7 +14,7 @@ def daily_view(request):
         deadline__date=today
     )
 
-    meetings = request.user.meeting_set.filter(date=today)
+    meetings = request.user.meeting_set.filter(datetime__date=today)
 
     return render(request, 'calendar_app/daily.html', {
         'tasks': tasks,
@@ -34,7 +34,7 @@ def monthly_view(request):
         deadline__date__range=(start, end)
     )
 
-    meetings = request.user.meeting_set.filter(date__range=(start, end))
+    meetings = request.user.meeting_set.filter(datetime__date=today)
 
     calendar_data = defaultdict(lambda: {'tasks': [], 'meetings': []})
 
@@ -42,7 +42,7 @@ def monthly_view(request):
         calendar_data[task.deadline.date()]['tasks'].append(task)
 
     for meeting in meetings:
-        calendar_data[meeting.date]['meetings'].append(meeting)
+        calendar_data[meeting.datetime.date()]['meetings'].append(meeting)
 
     return render(request, 'calendar_app/monthly.html', {
         'calendar_data': dict(calendar_data),

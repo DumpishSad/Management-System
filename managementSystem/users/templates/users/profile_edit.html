@@ -1,10 +1,13 @@
-<h2>Редактирование профиля</h2>
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <h2>Редактирование профиля</h2>
 
-<form method="post">
+  <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Сохранить изменения</button>
-</form>
-
-<br>
-<a href="{% url 'profile' %}">Назад к профилю</a>
+    <button type="submit" class="btn btn-success">Сохранить изменения</button>
+    <a href="{% url 'profile' %}" class="btn btn-secondary">Назад</a>
+  </form>
+</div>
+{% endblock %}

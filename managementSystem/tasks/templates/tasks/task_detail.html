@@ -1,28 +1,39 @@
-<h2>{{ task.title }}</h2>
-<p>{{ task.description }}</p>
-<p>Статус: {{ task.get_status_display }}</p>
-<p>Исполнитель: {{ task.assignee }}</p>
-<p>Дедлайн: {{ task.deadline }}</p>
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <h2>{{ task.title }}</h2>
+  <p><strong>Описание:</strong> {{ task.description }}</p>
+  <p><strong>Статус:</strong> {{ task.get_status_display }}</p>
+  <p><strong>Исполнитель:</strong> {{ task.assignee }}</p>
+  <p><strong>Дедлайн:</strong> {{ task.deadline|date:"d.m.Y H:i" }}</p>
 
-<h3>Комментарии</h3>
-<ul>
-  {% for comment in comments %}
-    <li><strong>{{ comment.author.username }}:</strong> {{ comment.text }}</li>
-  {% endfor %}
-</ul>
+  {% if can_evaluate %}
+    <a href="{% url 'evaluate_task' task.pk %}" class="btn btn-warning mb-2">Оценить задачу</a>
+  {% endif %}
 
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Добавить комментарий</button>
-</form>
+  <div class="mb-3">
+    <a href="{% url 'task_update' task.pk %}" class="btn btn-secondary">Редактировать</a>
+    <form method="post" action="{% url 'task_delete' task.pk %}" style="display:inline;">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">Удалить</button>
+    </form>
+  </div>
 
-{% if can_evaluate %}
-  <a href="{% url 'evaluate_task' task.pk %}">Оценить задачу</a>
-{% endif %}
+  <h3>Комментарии</h3>
+  <ul class="list-group mb-3">
+    {% for comment in comments %}
+      <li class="list-group-item">
+        <strong>{{ comment.author.username }}:</strong> {{ comment.text }}
+      </li>
+    {% empty %}
+      <li class="list-group-item text-muted">Комментариев нет</li>
+    {% endfor %}
+  </ul>
 
-<a href="{% url 'task_update' task.pk %}">Изменить</a>
-<form method="post" action="{% url 'task_delete' task.pk %}">
-  {% csrf_token %}
-  <button type="submit">Удалить</button>
-</form>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Добавить комментарий</button>
+  </form>
+</div>
+{% endblock %}

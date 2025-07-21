@@ -1,10 +1,16 @@
-<h2>Удаление команды</h2>
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <h2 class="text-danger">Удаление команды</h2>
+  <p>
+    Вы действительно хотите удалить команду <strong>{{ team.name }}</strong>?<br>
+    Все участники останутся без команды.
+  </p>
 
-<p>Вы действительно хотите удалить команду <strong>{{ team.name }}</strong>?<br>
-Все участники останутся без команды.</p>
-
-<form method="post">
+  <form method="post">
     {% csrf_token %}
-    <button type="submit">Удалить</button>
-    <a href="{% url 'team_detail' %}">Отмена</a>
-</form>
+    <button type="submit" class="btn btn-danger">Удалить</button>
+    <a href="{% url 'team_detail' %}" class="btn btn-secondary">Отмена</a>
+  </form>
+</div>
+{% endblock %}

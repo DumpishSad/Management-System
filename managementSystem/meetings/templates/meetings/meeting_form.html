@@ -1,6 +1,16 @@
-<h2>Назначить встречу</h2>
-<form method="post">
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <h2>Назначить встречу</h2>
+
+  <form method="post" class="form">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Создать встречу</button>
-</form>
+    <button type="submit" class="btn btn-success">Создать встречу</button>
+  </form>
+
+  <div class="mt-3">
+    <a href="{% url 'my_meetings' %}" class="btn btn-link">← К списку встреч</a>
+  </div>
+</div>
+{% endblock %}

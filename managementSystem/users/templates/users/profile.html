@@ -1,12 +1,14 @@
-<h2>Добро пожаловать, {{ user.username }}!</h2>
-<p>Это ваш личный кабинет.</p>
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <h2>Добро пожаловать, {{ user.username }}!</h2>
+  <p>Это ваш личный кабинет.</p>
 
-<hr>
+  <hr>
 
-<form action="{% url 'edit_profile' %}" method="get" style="display:inline;">
-    <button type="submit">Редактировать профиль</button>
-</form>
-
-<form action="{% url 'delete_account' %}" method="get" style="display:inline;">
-    <button type="submit" style="background-color: red; color: white;">Удалить аккаунт</button>
-</form>
+  <div class="d-flex gap-2">
+    <a href="{% url 'edit_profile' %}" class="btn btn-outline-primary">Редактировать профиль</a>
+    <a href="{% url 'delete_account' %}" class="btn btn-outline-danger">Удалить аккаунт</a>
+  </div>
+</div>
+{% endblock %}
